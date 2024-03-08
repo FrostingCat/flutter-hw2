@@ -4,6 +4,7 @@ import 'package:hw1/core/main_providers.dart';
 import 'package:hw1/domain/entities/article_entity.dart';
 import 'package:hw1/domain/repositories/news_repository.dart';
 import 'package:hw1/ui/screens/home/widgets/news_widget.dart';
+import 'package:hw1/core/favorite_provider.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -38,7 +39,10 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
+    //final list = 
+    // final provider = FavoriteProvider.of(context);
     final links = ref.watch<List<ArticleEntity>>(newsProvider);
+    //print(ref.watch<List<ArticleEntity>>(newsProvider));
 
     return DefaultTabController(
       length: 2,

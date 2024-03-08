@@ -18,8 +18,16 @@ class NewsTile extends ConsumerWidget {
       required this.article,
       super.key});
 
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    //print(ref.watch<List<ArticleEntity>>(newsProvider));
+    //final provider = FavoriteProvider.of(context);
+    //final news = ref.watch<List<ArticleEntity>>(newsProvider);
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -72,19 +80,16 @@ class NewsTile extends ConsumerWidget {
                   margin: const EdgeInsets.only(bottom: 30),
                   child: IconButton(
                     onPressed: () {
-                      if (ref.read(newsProvider).contains(article)) {
-                        ref.read(newsProvider.notifier).update((state) => state
-                            .where((element) => element.title != article.title)
-                            .toList());
+                      final news = ref.watch(newsProvider);
+                      if (news.contains(article)) {
+                        news.remove(article);
+                        ref.read(newsProvider.notifier).state = news;
                       } else {
-                        ref
-                            .read(newsProvider.notifier)
-                            .update((state) => [...state, article]);
+                        news.add(article);
+                        ref.read(newsProvider.notifier).state = news;
                       }
                     },
-                    icon: ref
-                            .watch<List<ArticleEntity>>(newsProvider)
-                            .contains(article)
+                    icon: ref.watch(newsProvider).contains(article)
                         ? const Icon(Icons.favorite)
                         : const Icon(Icons.favorite_border),
                   ),
