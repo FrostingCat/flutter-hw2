@@ -1,48 +1,38 @@
-// import 'package:flutter/material.dart';
-// import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'package:hw1/domain/entities/article_entity.dart';
-// import 'package:provider/provider.dart';
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:hw1/domain/entities/article_entity.dart';
+import 'package:provider/provider.dart';
 
-// class FavoriteProvider extends ChangeNotifier {
-//   List<ArticleEntity> _news = [];
-//   List<ArticleEntity> get news => _news;
+class FavoriteProvider extends StateNotifier<List<ArticleEntity>> {
+  FavoriteProvider(state) : super(state ?? []);
 
-//   void toggleFavorite(ArticleEntity news) {
-//     final isExist = _news.contains(news);
-//     if (isExist) {
-//       _news.remove(news);
-//     } else {
-//       _news.add(news);
-//     }
-//     notifyListeners();
-//   }
+  List<ArticleEntity> _news = [];
+  List<ArticleEntity> get news => _news;
 
-//   bool isExist(ArticleEntity news) {
-//     final isExist = _news.contains(news);
-//     return isExist;
-//   }
+  void toggleFavorite(ArticleEntity news) {
+    final isExist = _news.contains(news);
+    if (isExist) {
+      state = [ ...state, news];
+    } else {
+     state = state.where((ArticleEntity newss) => newss != news).toList();
+    }
+  }
 
-//   void clearFavorite() {
-//     _news = [];
-//     notifyListeners();
-//   }
+  bool isExist(ArticleEntity news) {
+    final isExist = _news.contains(news);
+    return isExist;
+  }
 
-//   static FavoriteProvider of(
-//     BuildContext context, {
-//     bool listen = true,
-//   }) {
-//     return Provider.of<FavoriteProvider>(
-//       context,
-//       listen: listen,
-//     );
-//   }
-// }
+  void clearFavorite() {
+    _news = [];
+  }
+}
 
-// class ContainerListState extends StateNotifier<List<ArticleEntity>> {
-//   ContainerListState() : super(const []);
-//   // No static provider declaration in here
-// }
-// // Provider moved out here
-// final containerListProvider = StateNotifierProvider<ContainerListState, List<ArticleEntity>>((ref) {
-//   return ContainerListState();
-// });
+class ContainerListState extends StateNotifier<List<ArticleEntity>> {
+  ContainerListState() : super(const []);
+  // No static provider declaration in here
+}
+// Provider moved out here
+final containerListProvider = StateNotifierProvider<ContainerListState, List<ArticleEntity>>((ref) {
+  return ContainerListState();
+});
