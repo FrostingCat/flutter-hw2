@@ -10,7 +10,7 @@ class NewsRuntimeDao implements NewsDao {
     List<ArticleDto> news = [];
 
     String url =
-        'https://newsapi.org/v2/everything?q=apple&from=2024-02-11&to=2024-02-11&sortBy=popularity&apiKey=d072211f628249d0960d277c69f480a6';
+        'https://newsapi.org/v2/everything?q=apple&from=2024-03-07&to=2024-03-14&sortBy=popularity&apiKey=d072211f628249d0960d277c69f480a6';
 
     var response = await http.get(Uri.parse(url));
 

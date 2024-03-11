@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hw2/ui/screens/home/widgets/news_widget.dart';
@@ -15,7 +14,7 @@ void main() {
     await tester.pumpAndSettle();
 
     const newsTitle =
-        "I never expected to love the Apple Watch Ultra 2 so much, and now I'm in trouble";
+        "Apple reinstates Epic's developer account two days after banning it";
     final newsTileFinder = find.byKey(const ValueKey(newsTitle));
     final favoriteButtonFinder = find.descendant(
       of: newsTileFinder,
@@ -50,7 +49,7 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
     const articleTitle =
-        "I never expected to love the Apple Watch Ultra 2 so much, and now I'm in trouble";
+        "Apple reinstates Epic's developer account two days after banning it";
     final newsTileFinder = find.byKey(const ValueKey(articleTitle));
     final favoriteButtonFinder = find.descendant(
       of: newsTileFinder,

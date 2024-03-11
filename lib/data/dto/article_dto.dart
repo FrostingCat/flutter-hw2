@@ -1,6 +1,6 @@
 class ArticleDto {
   String title;
-  String author;
+  String? author;
   String description;
   String urlToImage;
   DateTime publshedAt;
@@ -10,7 +10,7 @@ class ArticleDto {
   ArticleDto(
       {required this.title,
       required this.description,
-      required this.author,
+      this.author,
       required this.content,
       required this.publshedAt,
       required this.urlToImage,
