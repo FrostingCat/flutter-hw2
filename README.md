@@ -1,16 +1,39 @@
-# hw2
+# Зайцева Юлия Александровна, БПИ213
 
-A new Flutter project.
+# Домашнее задание №2
 
-## Getting Started
+## Приложено:
 
-This project is a starting point for a Flutter application.
+a. APK-файл
 
-A few resources to get you started if this is your first Flutter project:
+## Добавленная функциональность:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+a. Реализован механизм сохранения избранных новостных статей (кнопку “нравится” для новости)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+b. Реализован новый экран с отображением любимых статей
+
+## Требования к коду:
+
+a. Код отформатирован
+
+b. Использован Riverpod для реализации управления состоянием UI
+
+c. Разделение проекта на слои и декомпозиция логики (Data / Domain / UI/ Core)
+
+d. Написание Unit-тестов для ключевых функций в приложении
+
+## Дополнительные требования. Реализовано:
+
+a. Интеграционные тесты на ключевые методы
+
+b. Виджет тесты на ключевые виджеты
+
+## Скриншоты:
+
+Главный экран
+
+![дз2 - 1](https://github.com/FrostingCat/flutter-hw2/assets/97798186/3bcc2f97-ad75-4627-9b64-e035d6e7b157)
+
+Экран любимых новостей
+
+![дз2 - 2](https://github.com/FrostingCat/flutter-hw2/assets/97798186/e543ca9c-62b3-426e-bfa3-a3db850a7558)
