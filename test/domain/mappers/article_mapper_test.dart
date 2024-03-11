@@ -12,8 +12,7 @@ void main() {
         content: 'content',
         publshedAt: DateTime(2024, 1, 1),
         urlToImage: 'urlToImage',
-        articleUrl: 'articleUrl'
-    );
+        articleUrl: 'articleUrl');
 
     final articleEntity = articleMapper.mapArticleDtoToEntity(articleDto);
 

@@ -5,7 +5,6 @@ import 'package:hw2/data/dto/article_dto.dart';
 import 'package:hw2/data/dao/news_dao.dart';
 
 class NewsRuntimeDao implements NewsDao {
-
   @override
   Future<List<ArticleDto>> getNews() async {
     List<ArticleDto> news = [];
@@ -36,4 +35,3 @@ class NewsRuntimeDao implements NewsDao {
     return news;
   }
 }
-  

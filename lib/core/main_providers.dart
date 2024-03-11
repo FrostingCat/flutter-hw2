@@ -23,6 +23,4 @@ final newsRepositoryProvider = Provider<NewsRepository>(
 
 List<ArticleEntity> _news = [];
 
-final newsProvider = StateProvider<List<ArticleEntity>>(
-  (ref) => _news
-  );
+final newsProvider = StateProvider<List<ArticleEntity>>((ref) => _news);

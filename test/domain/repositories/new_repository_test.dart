@@ -24,9 +24,7 @@ class NewsDaoStub implements NewsDao {
 }
 
 void main() {
-  test(
-      'newsStream should return stream with one article',
-      () async {
+  test('newsStream should return stream with one article', () async {
     final NewsRepository newsRepository =
         NewsRepositoryImpl(NewsDaoStub(), ArticleMapper());
 

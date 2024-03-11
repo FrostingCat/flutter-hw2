@@ -14,7 +14,8 @@ void main() {
     app.main();
     await tester.pumpAndSettle();
 
-    const newsTitle = "I never expected to love the Apple Watch Ultra 2 so much, and now I'm in trouble";
+    const newsTitle =
+        "I never expected to love the Apple Watch Ultra 2 so much, and now I'm in trouble";
     final newsTileFinder = find.byKey(const ValueKey(newsTitle));
     final favoriteButtonFinder = find.descendant(
       of: newsTileFinder,
