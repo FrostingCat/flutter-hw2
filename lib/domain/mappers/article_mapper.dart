@@ -1,5 +1,5 @@
-import 'package:hw1/data/dto/article_dto.dart';
-import 'package:hw1/domain/entities/article_entity.dart';
+import 'package:hw2/data/dto/article_dto.dart';
+import 'package:hw2/domain/entities/article_entity.dart';
 
 class ArticleMapper {
   ArticleEntity mapArticleDtoToEntity(ArticleDto dto) => ArticleEntity(

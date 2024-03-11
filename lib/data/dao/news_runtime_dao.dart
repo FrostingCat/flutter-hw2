@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-import 'package:hw1/data/dto/article_dto.dart';
-import 'package:hw1/data/dao/news_dao.dart';
+import 'package:hw2/data/dto/article_dto.dart';
+import 'package:hw2/data/dao/news_dao.dart';
 
 class NewsRuntimeDao implements NewsDao {
 

@@ -1,4 +1,4 @@
-package com.example.hw1
+package ru.julia.hw2
 
 import io.flutter.embedding.android.FlutterActivity
 

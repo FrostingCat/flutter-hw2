@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-//import 'package:hw1/core/favorite_provider.dart';
-import 'package:hw1/core/theme_provider.dart';
-import 'package:hw1/ui/screens/home/home.dart';
+import 'package:hw2/core/theme_provider.dart';
+import 'package:hw2/ui/screens/home/home.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 void main() {

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hw1/core/main_providers.dart';
-import 'package:hw1/domain/entities/article_entity.dart';
-import 'package:hw1/domain/repositories/news_repository.dart';
-import 'package:hw1/ui/screens/home/widgets/news_widget.dart';
-import 'package:hw1/core/favorite_provider.dart';
+import 'package:hw2/core/main_providers.dart';
+import 'package:hw2/domain/entities/article_entity.dart';
+import 'package:hw2/domain/repositories/news_repository.dart';
+import 'package:hw2/ui/screens/home/widgets/news_widget.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
@@ -31,7 +30,6 @@ class _HomeView extends ConsumerStatefulWidget {
 }
 
 class _HomeViewState extends ConsumerState<_HomeView> {
-
   @override
   void initState() {
     super.initState();
@@ -39,10 +37,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
 
   @override
   Widget build(BuildContext context) {
-    //final list = 
-    // final provider = FavoriteProvider.of(context);
     final links = ref.watch<List<ArticleEntity>>(newsProvider);
-    //print(ref.watch<List<ArticleEntity>>(newsProvider));
 
     return DefaultTabController(
       length: 2,
@@ -61,9 +56,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
           elevation: 0.5,
           bottom: const TabBar(tabs: [
             Tab(
+              key: ValueKey('all_articles_tab'),
               icon: Icon(Icons.anchor_sharp),
             ),
-            Tab(icon: Icon(Icons.favorite))
+            Tab(
+                key: ValueKey('favorites_articles_tab'),
+                icon: Icon(Icons.favorite))
           ]),
         ),
         body: StreamBuilder(
@@ -91,6 +89,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
               _ => TabBarView(
                   children: [
                     Container(
+                      key: const ValueKey('all_articles_bar'),
                       padding: const EdgeInsets.symmetric(horizontal: 16),
                       child: Column(
                         children: <Widget>[
@@ -101,11 +100,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                                 physics: const ClampingScrollPhysics(),
                                 itemBuilder: (context, index) {
                                   return NewsTile(
-                                      imgUrl: articles[index].urlToImage,
-                                      title: articles[index].title,
-                                      desc: articles[index].description,
-                                      content: articles[index].content,
-                                      posturl: articles[index].articleUrl,
+                                      key: ValueKey(articles[index].title),
                                       article: articles[index]);
                                 }),
                           ),
@@ -113,6 +108,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                       ),
                     ),
                     Container(
+                      key: const ValueKey('favorite_articles_bar'),
                       color: Theme.of(context).primaryColor,
                       child: Container(
                         padding: const EdgeInsets.symmetric(horizontal: 16),
@@ -125,11 +121,7 @@ class _HomeViewState extends ConsumerState<_HomeView> {
                                   physics: const ClampingScrollPhysics(),
                                   itemBuilder: (context, index) {
                                     return NewsTile(
-                                        imgUrl: links[index].urlToImage,
-                                        title: links[index].title,
-                                        desc: links[index].description,
-                                        content: links[index].content,
-                                        posturl: links[index].articleUrl,
+                                        key: ValueKey(articles[index].title),
                                         article: links[index]);
                                   }),
                             ),

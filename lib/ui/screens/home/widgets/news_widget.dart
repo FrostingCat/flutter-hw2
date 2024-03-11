@@ -1,40 +1,41 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:hw1/core/main_providers.dart';
-import 'package:hw1/domain/entities/article_entity.dart';
-import 'package:hw1/core/favorite_provider.dart';
-import 'package:hw1/ui/screens/article/article_view.dart';
+import 'package:hw2/core/main_providers.dart';
+import 'package:hw2/domain/entities/article_entity.dart';
+import 'package:hw2/ui/screens/article/article_view.dart';
 
 class NewsTile extends ConsumerWidget {
-  final String imgUrl, title, desc, content, posturl;
   final ArticleEntity article;
+  final bool useLocalImage;
 
   const NewsTile(
-      {required this.imgUrl,
-      required this.desc,
-      required this.title,
-      required this.content,
-      required this.posturl,
-      required this.article,
-      super.key});
-
-  // @override
-  // void initState() {
-  //   super.initState();
-  // }
+      {required this.article, this.useLocalImage = false, super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    //print(ref.watch<List<ArticleEntity>>(newsProvider));
-    //final provider = FavoriteProvider.of(context);
-    //final news = ref.watch<List<ArticleEntity>>(newsProvider);
+    Widget newsImage = useLocalImage
+        ? Image.file(
+            File(article.urlToImage),
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          )
+        : Image.network(
+            article.urlToImage,
+            height: 200,
+            width: MediaQuery.of(context).size.width,
+            fit: BoxFit.cover,
+          );
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
             context,
             MaterialPageRoute(
                 builder: (context) => ArticleView(
-                      postUrl: posturl,
+                      postUrl: article.articleUrl,
                     )));
       },
       child: Container(
@@ -52,18 +53,12 @@ class NewsTile extends ConsumerWidget {
             mainAxisSize: MainAxisSize.min,
             children: <Widget>[
               ClipRRect(
-                  borderRadius: BorderRadius.circular(6),
-                  child: Image.network(
-                    imgUrl,
-                    height: 200,
-                    width: MediaQuery.of(context).size.width,
-                    fit: BoxFit.cover,
-                  )),
+                  borderRadius: BorderRadius.circular(6), child: newsImage),
               const SizedBox(
                 height: 12,
               ),
               Text(
-                title,
+                article.title,
                 maxLines: 2,
                 style: Theme.of(context).textTheme.bodyMedium,
               ),
@@ -71,7 +66,7 @@ class NewsTile extends ConsumerWidget {
                 height: 4,
               ),
               Text(
-                desc,
+                article.description,
                 maxLines: 2,
                 style: Theme.of(context).textTheme.bodySmall,
               ),
@@ -80,16 +75,19 @@ class NewsTile extends ConsumerWidget {
                   margin: const EdgeInsets.only(bottom: 30),
                   child: IconButton(
                     onPressed: () {
-                      final news = ref.watch(newsProvider);
-                      if (news.contains(article)) {
-                        news.remove(article);
-                        ref.read(newsProvider.notifier).state = news;
+                      if (ref.read(newsProvider).contains(article)) {
+                        ref.read(newsProvider.notifier).update((state) => state
+                            .where((element) => element.title != article.title)
+                            .toList());
                       } else {
-                        news.add(article);
-                        ref.read(newsProvider.notifier).state = news;
+                        ref
+                            .read(newsProvider.notifier)
+                            .update((state) => [...state, article]);
                       }
                     },
-                    icon: ref.watch(newsProvider).contains(article)
+                    icon: ref
+                            .watch<List<ArticleEntity>>(newsProvider)
+                            .contains(article)
                         ? const Icon(Icons.favorite)
                         : const Icon(Icons.favorite_border),
                   ),
